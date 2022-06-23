@@ -76,11 +76,11 @@ module.exports = {
     'array-element-newline': 'off',
     // error; 代码块如果在一行，则大括号内的首尾必须有空格，比如 function (a, b) { retur a + b; }
     'block-spacing': [
-      2,
+      'error',
       'always'
     ],
     // off; 变量命名需要以驼峰命名法，对属性字段不做限制
-    'camelcase': [0, {properties: 'never'}],
+    'camelcase': ['off', {properties: 'never'}],
     // error; 大括号的用法要求
     'brace-style': 'error',
     // off; 注释的首字母必须大写，对此不做限制
@@ -89,7 +89,7 @@ module.exports = {
     'comma-spacing': 'error',
     // error; 逗号必须写在最后面
     'comma-style': [
-      2,
+      'error',
       'last'
     ],
     // off; 函数名和执行它的括号之间禁止有空格
@@ -111,7 +111,7 @@ module.exports = {
     ],
     // error; 关键字前后必须要加上空格
     'keyword-spacing': [
-      2,
+      'error',
       {
         before: true,
         after: true
@@ -122,8 +122,8 @@ module.exports = {
     // off; 注释的位置不进行限制
     'line-comment-position': 'off',
     // error; 单行最多允许200个字符, 对包含url的行不进行此限制
-    'max-len': ['error', {
-      code: 150,
+    'max-len': [2, {
+      code: 200,
       tabWidth: 2,
       ignoreUrls: true
     }],
@@ -146,7 +146,7 @@ module.exports = {
     'no-whitespace-before-property': 'error',
     // error; 大括号内的首尾必须有换行
     'object-curly-newline': [
-      2,
+      'error',
       {
         multiline: true,
         consistent: true
@@ -171,7 +171,7 @@ module.exports = {
     'semi': 'error',
     // error; 一行有多个语句时，分号前面禁止有空格，分号后面必须有空格
     'semi-spacing': [
-      2,
+      'error',
       {
         before: false,
         after: true
@@ -182,9 +182,9 @@ module.exports = {
     // error; 分号必须写在行尾，禁止在行首出现
     'semi-style': ['error', 'last'],
     // error; 小括号内的首尾禁止有空格
-    'space-in-parens': [2, 'never'],
+    'space-in-parens': ['error', 'never'],
     // error; 操作符左右必须有空格, const ret = 'hello' + 'world';
-    'space-infix-ops': 2,
+    'space-infix-ops': 'error',
     // error; case 子句冒号前禁止有空格，冒号后必须有空格
     'switch-colon-spacing': [
       'error',
@@ -195,12 +195,12 @@ module.exports = {
     ],
     // section 4: ES6 语法相关
     // off; 箭头函数返回值可以只是一个值，没必须一定用大括号写成多条语句.
-    'arrow-body-style': 0,
+    'arrow-body-style': 'off',
     // off; 箭头函数的参数必须用括号包裹起来，限制去掉。当只有一个参数时，没必要使用括号
-    'arrow-parens': 0,
+    'arrow-parens': 'off',
     // error; 箭头函数的箭头前后必须有空格
     'arrow-spacing': [
-      2,
+      'error',
       {
         before: true,
         after: true
@@ -208,34 +208,34 @@ module.exports = {
     ],
     // error; generator 的 * 前面禁止有空格，后面必须有空格
     'generator-star-spacing': [
-      2,
+      'error',
       {
         before: false,
         after: true
       }
     ],
     // error; 禁止import重复模块
-    'no-duplicate-imports': 2,
+    'no-duplicate-imports': 'error',
     // error; 禁止采用var去定义变量，必须使用let或者const
-    'no-var': 2,
+    'no-var': 'error',
     // off; 必须使用箭头函数作为回调，不采纳
-    'prefer-arrow-callback': 0,
+    'prefer-arrow-callback': 'off',
     // error; 变量如果没有发生修改，则必须使用const进行命名
-    'prefer-const': 2,
+    'prefer-const': 'error',
     // off; 强制使用结构的限制，不采纳
-    'prefer-destructuring': 0,
+    'prefer-destructuring': 'off',
     // off; 不强制使用模板字符串，字符串拼接也是可取的
-    'prefer-template': 0,
+    'prefer-template': 'off',
     // error; ... 的后面禁止有空格
-    'rest-spread-spacing': [2, 'never'],
+    'rest-spread-spacing': ['error', 'never'],
     // off; import 的排序不用限制
-    'sort-imports': 0,
+    'sort-imports': 'off',
     // error; 模板字符串内的首尾禁止有空格，比如${test}不要写成${ test }
     // TODO: 当jsx代码里有xxProp={``}会导致eslint出错奔溃，先注释
-    // 'template-curly-spacing': [2, 'never'],
+    // 'template-curly-spacing': ['error', 'never'],
     // error; yield* 后面必须加空格
-    'yield-star-spacing': [2, 'after'],
-    'react/prop-types': 0,
+    'yield-star-spacing': ['error', 'after'],
+    'react/prop-types': 'off',
     // error; 缩进两个空格
     'indent': ['error', 2]
   }

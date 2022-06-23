@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-cupshe",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "cupshe团队eslint配置检测规范",
   "main": "index.js",
   "scripts": {
