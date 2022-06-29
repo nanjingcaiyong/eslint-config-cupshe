@@ -20,6 +20,8 @@ module.exports = {
     'no-param-reassign': 'warn',
     // error; 禁止对function的参数进行重新赋值
     'no-param-reassign': 'error',
+    // error; 禁止不必要的布尔类型转换
+    'no-extra-boolean-cast': 'error',
     // error; return语句中禁止进行赋值语句操作
     'no-return-assign': 'error',
     // off; 允许location.href = 'javascript:void(0)'的形式
@@ -28,8 +30,14 @@ module.exports = {
     'no-throw-literal': 'error',
     // off; TODO 和 FIXME 类型的注释用的比较多，不限制
     'no-warning-comments': 'off',
+    // error; 禁止冗余的括号
+    'no-extra-parens': 'error',
+    // error; 禁止对关系运算符的左操作数使用否定操作符
+    'no-unsafe-negation': 'error',
+    // error; 禁止不要的分号
+    'no-extra-semi': 'error',
     // error; Promise 的 reject方法必须传入 Error 对象，而不能是字面量
-    'prefer-promise-reject-errors': 'error',
+    'prefer-promise-reject-errors': 'off',
     // error; switch case语句里面一定需要default分支
     'default-case': 'error',
     // error; async函数里面必须有await
@@ -69,7 +77,7 @@ module.exports = {
     // error; 要求函数圆括号之前有一个空格
     'space-before-function-paren': 'error',
     // off; 数组前后括号必须换行的要求有点严格，不采纳
-    'array-bracket-newline': 'off', 
+    'array-bracket-newline': 'off',
     // error; 数组的括号前后禁止有空格
     'array-bracket-spacing': ['error', 'never'],
     // off; 数组里面的元素强制换行有点严格，不采纳
@@ -80,7 +88,7 @@ module.exports = {
       'always'
     ],
     // off; 变量命名需要以驼峰命名法，对属性字段不做限制
-    'camelcase': ['off', {properties: 'never'}],
+    'camelcase': ['warn'],
     // error; 大括号的用法要求
     'brace-style': 'error',
     // off; 注释的首字母必须大写，对此不做限制
@@ -121,11 +129,22 @@ module.exports = {
     'max-params': ['error', 10],
     // off; 注释的位置不进行限制
     'line-comment-position': 'off',
-    // error; 单行最多允许200个字符, 对包含url的行不进行此限制
-    'max-len': [2, {
-      code: 200,
+    // warn; 单行最多允许200个字符, 非常长的代码影响阅读
+    'max-len': ['warn', {
+      code: 120,
       tabWidth: 2,
-      ignoreUrls: true
+      ignoreComments: true,         // 忽略注释
+      ignoreUrls: true,             // 忽略url
+      ignoreTemplateLiterals: true, // 忽略字符串模板
+      ignoreStrings: true,          // 忽略含有双引号或单引号字符串的行
+      ignoreTrailingComments: true, // 忽略拖尾注释
+      ignoreRegExpLiterals: true,   // 忽略包含正则表达式的行
+    }],
+    // warn; 单文件最大500行, 不包含空白行和注释行
+    'max-lines': ['warn', {
+      max: 500,
+      skipBlankLines: true,
+      skipComments: true
     }],
     // error; 构造函数的必须以大写字母开头
     'new-cap': 'error',
@@ -133,22 +152,36 @@ module.exports = {
     'new-parens': 'error',
     // error; ... 的后面禁止有空格
     'rest-spread-spacing': ['error', 'never'],
+    // error; 要求花空号{}内前后必要带空格
+    'object-curly-spacing': ['error', 'always'],
+
+    'object-property-newline': ['error', { 'allowAllPropertiesOnSameLine': false }],
+    // error; 禁用行尾空格
+    'no-trailing-spaces': ['error', {
+      ignoreComments: true, // 忽略注释
+      skipBlankLines: true  // 忽略空行
+    }],
     // error; 禁止混用空格和缩进
     'no-mixed-spaces-and-tabs': 'error',
     // off; 连续赋值比如 a = b = c = 4; 不限制
     'no-multi-assign': 'off',
-    // off; 连续空行，不限制
-    'no-multiple-empty-lines': 'off',
+    // error; 不允许出现连续空行
+    'no-multiple-empty-lines': ['error', {
+      max: 1
+    }],
     // off; 允许变量名中出现下划线
     'no-underscore-dangle': 'off',
     'no-unneeded-ternary': 'off',
     // error; 禁止属性前有空格，比如 foo. bar()
     'no-whitespace-before-property': 'error',
+    // error; 强制单个语句的位置
+    'nonblock-statement-body-position': ['error', 'beside'],
     // error; 大括号内的首尾必须有换行
     'object-curly-newline': [
       'error',
       {
         multiline: true,
+        minProperties: 5,
         consistent: true
       }
     ],

@@ -1,11 +1,8 @@
 {
   "name": "eslint-config-cupshe",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "cupshe团队eslint配置检测规范",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "author": "caiyong <yong.cai@kapeixi.com>",
   "keywords": [
     "cupshe",
     "code",
@@ -13,12 +10,22 @@
     "eslint",
     "code style"
   ],
-  "repository": "https://github.com/nanjingcaiyong/eslint-config-cupshe",
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/nanjingcaiyong/eslint-config-cupshe/issues",
+    "email": "yong.cai@kapeixi.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nanjingcaiyong/eslint-config-cupshe"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "engines": {
     "node": ">=v16.13.0",
     "npm": ">=8.5.0"
   },
-  "author": "yong.cai",
   "license": "ISC",
   "peerDependencies": {
     "eslint": ">= 7"
