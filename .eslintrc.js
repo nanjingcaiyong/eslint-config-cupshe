@@ -1,10 +1,21 @@
 module.exports = {
   'env': {
-    'es6': true,
-    'browser': true,
-    'node': true
+    'es6': true,          // 自动启用es6语法, 支持新的 ES6 全局变量或类型（比如 Set 等新类型)
+    'browser': true,      // 启用浏览器环境中的全局变量
+    'node': true          // 启用Node.js 全局变量和 Node.js 作用域
   },
-  rules: {
+  'parserOptions': {
+    'ecmaVersion': 'latest',  // 指定你想要使用的 ECMAScript 版本
+    'ecmaFeatures': {     // 表示你想使用的额外的语言特性
+      'jsx': true         // 启用 JSX
+    }
+  },
+  'globals': {
+    'defineEmits': 'writable',
+    'defineProps': 'writable',
+    'defineExpose': 'writable'
+  },
+  'rules': {
     /* section 1 */
     // error: 生产环境禁止代码中使用console
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
@@ -18,15 +29,13 @@ module.exports = {
     'no-lone-blocks': 'error',
     // warn; 对函数的参数重新赋值给出警告
     'no-param-reassign': 'warn',
-    // error; 禁止对function的参数进行重新赋值
-    'no-param-reassign': 'error',
     // error; 禁止不必要的布尔类型转换
     'no-extra-boolean-cast': 'error',
     // error; return语句中禁止进行赋值语句操作
     'no-return-assign': 'error',
-    // off; 允许location.href = 'javascript:void(0)'的形式
+    // off; 允许location.href = "javascript:void(0)"的形式
     'no-script-url': 'off',
-    // error; 禁止throw一个字面量，比如 throw 2, throw 'error';
+    // error; 禁止throw一个字面量，比如 throw 2, throw "error";
     'no-throw-literal': 'error',
     // off; TODO 和 FIXME 类型的注释用的比较多，不限制
     'no-warning-comments': 'off',
@@ -36,10 +45,8 @@ module.exports = {
     'no-unsafe-negation': 'error',
     // error; 禁止不要的分号
     'no-extra-semi': 'error',
-    // error; Promise 的 reject方法必须传入 Error 对象，而不能是字面量
-    'prefer-promise-reject-errors': 'off',
     // error; switch case语句里面一定需要default分支
-    'default-case': 'error',
+    'default-case': 'warn',
     // error; async函数里面必须有await
     'require-await': 'error',
     // error; 把var关键字看成块级作用域，防止变量提升导致的bug
@@ -53,7 +60,7 @@ module.exports = {
     // error; 禁止修改原生对象
     'no-extend-native': 'error',
     // error; 对于数据相关操作函数比如reduce, map, filter等，callback必须有return
-    'array-callback-return': 'error',
+    'array-callback-return': 'off',
 
     /* section 2: 变量 */
     'no-unused-vars': 'error',
@@ -65,14 +72,13 @@ module.exports = {
     'no-undef': [
       'error',
       {
-        typeof: false
+        'typeof': false
       }
     ],
     // error; 变量使用之前必须进行定义
     'no-use-before-define': 'error',
     // error; 禁止将undefined当成标志符
-    'no-undefined': 'error',
-
+    'no-undefined': 'warn',
     /* section 3: 代码风格 */
     // error; 要求函数圆括号之前有一个空格
     'space-before-function-paren': 'error',
@@ -88,7 +94,7 @@ module.exports = {
       'always'
     ],
     // off; 变量命名需要以驼峰命名法，对属性字段不做限制
-    'camelcase': ['warn'],
+    'camelcase': ['off'],
     // error; 大括号的用法要求
     'brace-style': 'error',
     // off; 注释的首字母必须大写，对此不做限制
@@ -112,17 +118,17 @@ module.exports = {
     'key-spacing': [
       'error',
       {
-        beforeColon: false,
-        afterColon: true,
-        mode: 'strict',
+        'beforeColon': false,
+        'afterColon': true,
+        'mode': 'strict'
       }
     ],
     // error; 关键字前后必须要加上空格
     'keyword-spacing': [
       'error',
       {
-        before: true,
-        after: true
+        'before': true,
+        'after': true
       }
     ],
     // error; 函数的参数禁止超过 10 个
@@ -131,35 +137,33 @@ module.exports = {
     'line-comment-position': 'off',
     // warn; 单行最多允许200个字符, 非常长的代码影响阅读
     'max-len': ['warn', {
-      code: 120,
-      tabWidth: 2,
-      ignoreComments: true,         // 忽略注释
-      ignoreUrls: true,             // 忽略url
-      ignoreTemplateLiterals: true, // 忽略字符串模板
-      ignoreStrings: true,          // 忽略含有双引号或单引号字符串的行
-      ignoreTrailingComments: true, // 忽略拖尾注释
-      ignoreRegExpLiterals: true,   // 忽略包含正则表达式的行
+      'code': 200,
+      'tabWidth': 2,
+      'ignoreComments': true,         // 忽略注释
+      'ignoreUrls': true,             // 忽略url
+      'ignoreTemplateLiterals': true, // 忽略字符串模板
+      'ignoreStrings': true,          // 忽略含有双引号或单引号字符串的行
+      'ignoreTrailingComments': true, // 忽略拖尾注释
+      'ignoreRegExpLiterals': true,   // 忽略包含正则表达式的行
     }],
     // warn; 单文件最大500行, 不包含空白行和注释行
     'max-lines': ['warn', {
-      max: 500,
-      skipBlankLines: true,
-      skipComments: true
+      'max': 1000,
+      'skipBlankLines': true,
+      'skipComments': true
     }],
     // error; 构造函数的必须以大写字母开头
-    'new-cap': 'error',
+    'new-cap': ['error', { 'capIsNew': false }],
     // error; new 后面类必须带上括号
     'new-parens': 'error',
-    // error; ... 的后面禁止有空格
-    'rest-spread-spacing': ['error', 'never'],
     // error; 要求花空号{}内前后必要带空格
     'object-curly-spacing': ['error', 'always'],
 
     'object-property-newline': ['error', { 'allowAllPropertiesOnSameLine': false }],
     // error; 禁用行尾空格
     'no-trailing-spaces': ['error', {
-      ignoreComments: true, // 忽略注释
-      skipBlankLines: true  // 忽略空行
+      'ignoreComments': true, // 忽略注释
+      'skipBlankLines': true  // 忽略空行
     }],
     // error; 禁止混用空格和缩进
     'no-mixed-spaces-and-tabs': 'error',
@@ -167,7 +171,7 @@ module.exports = {
     'no-multi-assign': 'off',
     // error; 不允许出现连续空行
     'no-multiple-empty-lines': ['error', {
-      max: 1
+      'max': 1
     }],
     // off; 允许变量名中出现下划线
     'no-underscore-dangle': 'off',
@@ -180,24 +184,24 @@ module.exports = {
     'object-curly-newline': [
       'error',
       {
-        multiline: true,
-        minProperties: 5,
-        consistent: true
+        'multiline': true,
+        'minProperties': 5,
+        'consistent': true
       }
     ],
     // off; 声明变量时，禁止一条语句声明多个变量
     'one-var': ['off', {
-      var: 'never',
-      let: 'never',
-      const: 'never',
+      'var': 'never',
+      'let': 'never',
+      'const': 'never'
     }],
     // error; 必须使用单引号
     'quotes': [
       'error',
       'single',
       {
-        avoidEscape: true,
-        allowTemplateLiterals: true
+        'avoidEscape': true,
+        'allowTemplateLiterals': true
       }
     ],
     // error; 结尾必须有分号
@@ -206,8 +210,8 @@ module.exports = {
     'semi-spacing': [
       'error',
       {
-        before: false,
-        after: true
+        'before': false,
+        'after': true
       }
     ],
     // error; if, function 等的大括号之前必须要有空格
@@ -216,14 +220,14 @@ module.exports = {
     'semi-style': ['error', 'last'],
     // error; 小括号内的首尾禁止有空格
     'space-in-parens': ['error', 'never'],
-    // error; 操作符左右必须有空格, const ret = 'hello' + 'world';
+    // error; 操作符左右必须有空格, const ret = "hello" + "world";
     'space-infix-ops': 'error',
     // error; case 子句冒号前禁止有空格，冒号后必须有空格
     'switch-colon-spacing': [
       'error',
       {
-        after: true,
-        before: false
+        'after': true,
+        'before': false
       }
     ],
     // section 4: ES6 语法相关
@@ -235,26 +239,28 @@ module.exports = {
     'arrow-spacing': [
       'error',
       {
-        before: true,
-        after: true
+        'before': true,
+        'after': true
       }
     ],
     // error; generator 的 * 前面禁止有空格，后面必须有空格
     'generator-star-spacing': [
       'error',
       {
-        before: false,
-        after: true
+        'before': false,
+        'after': true
       }
     ],
     // error; 禁止import重复模块
     'no-duplicate-imports': 'error',
     // error; 禁止采用var去定义变量，必须使用let或者const
     'no-var': 'error',
+    // error; Promise 的 reject方法必须传入 Error 对象，而不能是字面量
+    'prefer-promise-reject-errors': 'off',
     // off; 必须使用箭头函数作为回调，不采纳
     'prefer-arrow-callback': 'off',
     // error; 变量如果没有发生修改，则必须使用const进行命名
-    'prefer-const': 'error',
+    'prefer-const': 'warn',
     // off; 强制使用结构的限制，不采纳
     'prefer-destructuring': 'off',
     // off; 不强制使用模板字符串，字符串拼接也是可取的
@@ -265,11 +271,19 @@ module.exports = {
     'sort-imports': 'off',
     // error; 模板字符串内的首尾禁止有空格，比如${test}不要写成${ test }
     // TODO: 当jsx代码里有xxProp={``}会导致eslint出错奔溃，先注释
-    // 'template-curly-spacing': ['error', 'never'],
+    // "template-curly-spacing": ["error", "never"],
     // error; yield* 后面必须加空格
     'yield-star-spacing': ['error', 'after'],
     'react/prop-types': 'off',
     // error; 缩进两个空格
-    'indent': ['error', 2]
+    'indent': ['error', 2],
+
+    // section 5: 重置vue
+    // vue3
+    'vue/no-v-html': 'off',
+    'vue/require-default-prop': 'off',
+    'vue/require-prop-types': 'off',
+    // vue2
+    'vue/no-v-text-v-html-on-component': 'off'
   }
 };
